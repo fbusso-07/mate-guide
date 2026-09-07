@@ -12,81 +12,138 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1.6;
+  font-family: "Inter", Georgia, "Times New Roman", serif;
+  line-height: 1.65;
 }
 
 h1, h2, h3 {
-  font-family: Verdana, Arial, sans-serif;
+  font-family: "Fraunces", Georgia, serif;
   color: var(--color-accent-dark);
+  letter-spacing: -0.01em;
 }
 
 a {
   color: var(--color-accent-dark);
 }
 
-.site-header {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  padding: 2rem 1.5rem 1.5rem;
-  text-align: center;
-}
-
-.site-header h1 {
-  color: #ffffff;
-  margin: 0 0 0.25rem;
-}
-
-.subtitle {
-  margin: 0 0 1.25rem;
-  font-style: italic;
-  color: #eaf2ec;
-}
-
-.site-header nav {
+.site-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem 1.25rem;
+  gap: 0.5rem 1.5rem;
+  background-color: var(--color-card);
+  padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.site-header nav a {
+.site-nav a {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.3rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.hero {
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 2rem 1.5rem;
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin: 0 0 0.75rem;
+}
+
+.hero .subtitle {
+  margin: 0 0 2rem;
+  font-size: 1.15rem;
+  color: #f0ede6;
+}
+
+.hero-cta {
+  display: inline-block;
+  background-color: var(--color-accent);
   color: #ffffff;
   text-decoration: none;
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 0.9rem;
-  padding: 0.25rem 0.5rem;
-  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.site-header nav a:hover,
-.site-header nav a:focus {
-  border-bottom: 2px solid #ffffff;
+.hero-cta:hover,
+.hero-cta:focus {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 main {
   max-width: 760px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 section {
   background-color: var(--color-card);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 1.75rem;
+  border-radius: 14px;
+  padding: 2rem 2.25rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 2px 8px rgba(52, 92, 64, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  scroll-margin-top: 4.5rem;
+}
+
+section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(52, 92, 64, 0.1);
 }
 
 section h2 {
   margin-top: 0;
   border-bottom: 2px solid var(--color-border);
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.6rem;
+}
+
+.section-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .items-list li,
@@ -106,11 +163,17 @@ section h2 {
 }
 
 .checklist li {
-  padding: 0.6rem 0.75rem;
+  padding: 0.7rem 0.9rem;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 0.5rem;
   background-color: var(--color-bg);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.checklist li:hover {
+  transform: translateX(2px);
+  border-color: var(--color-accent);
 }
 
 .checklist label {
@@ -118,14 +181,15 @@ section h2 {
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
-  font-family: Verdana, Arial, sans-serif;
   font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .checklist input[type="checkbox"] {
   width: 1.15rem;
   height: 1.15rem;
   cursor: pointer;
+  accent-color: var(--color-accent);
 }
 
 .checklist li.checked {
@@ -134,34 +198,50 @@ section h2 {
 }
 
 .checklist-status {
-  font-family: Verdana, Arial, sans-serif;
-  font-weight: bold;
+  font-weight: 600;
   color: var(--color-accent-dark);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .checklist-status.all-ready {
   color: var(--color-accent-dark);
   background-color: #e6f0e9;
   border: 1px solid var(--color-accent);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0.6rem 0.9rem;
   display: inline-block;
 }
 
 .site-footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   color: #7a7364;
-  font-family: Verdana, Arial, sans-serif;
   font-size: 0.85rem;
 }
 
 @media (max-width: 480px) {
-  .site-header nav {
+  .site-nav {
     gap: 0.4rem 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .hero {
+    min-height: 70vh;
+  }
+
+  main {
+    padding: 2rem 1.25rem;
   }
 
   section {
-    padding: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .section-img {
+    height: 180px;
+  }
+
+  section {
+    scroll-margin-top: 7rem;
   }
 }
